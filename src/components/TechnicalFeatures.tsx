@@ -1,4 +1,4 @@
-import { Shield, Gauge, HeadphonesIcon, Globe, Lock, Zap } from 'lucide-react'
+import { Shield, Gauge, Globe, Lock, Zap } from 'lucide-react'
 
 const features = [
   {
@@ -12,12 +12,6 @@ const features = [
     title: 'Qualidade 4K/UHD',
     description: 'Streaming em até 4K com HDR para a melhor experiência visual',
     highlight: 'Ultra HD'
-  },
-  {
-    icon: HeadphonesIcon,
-    title: 'Suporte 24/7',
-    description: 'Equipe disponível todos os dias via WhatsApp, ticket e chat',
-    highlight: 'Atendimento rápido'
   },
   {
     icon: Globe,

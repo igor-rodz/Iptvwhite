@@ -41,7 +41,7 @@ const faqs: FAQItem[] = [
   {
     question: 'Vocês oferecem suporte técnico?',
     answer:
-      'Com certeza! Temos suporte técnico disponível 24 horas por dia, 7 dias por semana. No Plano Mensal, atendemos via sistema de tickets. No Plano Trimestral, você tem prioridade no atendimento. No Plano Anual, oferecemos suporte VIP direto pelo WhatsApp com resposta em minutos!'
+      'Com certeza! Temos suporte técnico disponível todos os dias para te auxiliar em qualquer dúvida ou configuração. Oferecemos suporte prioritário e VIP dependendo do seu plano, garantindo que você nunca fique na mão.'
   },
   {
     question: 'Posso cancelar minha assinatura a qualquer momento?',

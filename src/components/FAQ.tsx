@@ -58,7 +58,7 @@ export function FAQ() {
   }
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background" id="faq">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
@@ -118,11 +118,11 @@ export function FAQ() {
             via WhatsApp, email ou chat ao vivo.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors">
+            <button
+              className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors"
+              onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+            >
               💬 Falar no WhatsApp
-            </button>
-            <button className="px-6 py-3 bg-card hover:bg-muted border border-border text-foreground font-semibold rounded-lg transition-colors">
-              📧 Enviar Email
             </button>
           </div>
         </div>

@@ -4,12 +4,21 @@ import { Play, Sparkles } from 'lucide-react'
 export function HeroSection() {
 
   return (
-    <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden pt-8 pb-20">
+    <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden pt-28 pb-20">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_oklch(0.25_0.15_145),_transparent_50%)]" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
+          {/* Logo Principal */}
+          <div className="flex justify-center mb-6">
+            <img
+              src="/logo.png"
+              alt="AurixTV Logo"
+              className="h-20 md:h-28 w-auto animate-logo-glow rounded-3xl"
+            />
+          </div>
+
           {/* Badge de destaque */}
           <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-2">
             <Sparkles className="w-4 h-4 text-primary" />
@@ -35,7 +44,7 @@ export function HeroSection() {
             <Button
               size="lg"
               className="h-16 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/30 transition-all hover:scale-105 active:scale-95"
-              onClick={() => window.open('https://wa.me/5511999999999', '_blank')}
+              onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
             >
               <Play className="w-6 h-6 mr-2 fill-current" />
               QUERO MEU ACESSO IMEDIATO

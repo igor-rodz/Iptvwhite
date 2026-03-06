@@ -1,3 +1,4 @@
+import { Navbar } from '@/components/Navbar'
 import { HeroSection } from '@/components/HeroSection'
 import { MoviesCarousel } from '@/components/MoviesCarousel'
 import { DevicesSection } from '@/components/DevicesSection'
@@ -9,6 +10,7 @@ import { Footer } from '@/components/Footer'
 export function App() {
   return (
     <div className="relative min-h-screen bg-background">
+      <Navbar />
       <HeroSection />
       <MoviesCarousel />
       <DevicesSection />

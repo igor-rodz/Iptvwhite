@@ -115,7 +115,7 @@ export function Footer() {
             </ul>
             <div className="mt-4">
               <p className="text-xs text-muted-foreground mb-2">
-                Atendimento 24/7
+                Atendimento diário
               </p>
               <button
                 className="w-full px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors text-sm"
@@ -149,7 +149,7 @@ export function Footer() {
           <div className="mt-6 text-xs text-muted-foreground text-center">
             <p>
               Este serviço é fornecido para uso pessoal e não comercial. Garantimos
-              uptime de 99.9% e suporte técnico 24/7.
+              uptime de 99.9% e suporte técnico para te auxiliar.
             </p>
           </div>
         </div>

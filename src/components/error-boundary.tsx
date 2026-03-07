@@ -53,13 +53,13 @@ export class ErrorBoundary extends Component<Props, State> {
   componentDidMount() {
     // Escuta erros de compilação do Vite
     window.addEventListener('vite:error', this.handleViteError as EventListener)
-    
+
     // Captura erros de event handlers (síncronos)
     window.addEventListener('error', this.handleGlobalError)
 
     // Captura erros de carregamento de recursos (img, script, css) - fase de captura
     window.addEventListener('error', this.handleResourceError, true)
-    
+
     // Captura erros de promises não tratadas (assíncronos)
     window.addEventListener('unhandledrejection', this.handleUnhandledRejection)
   }
@@ -73,8 +73,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
   handleViteError = (event: CustomEvent<ViteError>) => {
     // Recebe o erro detalhado do Vite e força a atualização do estado
-    this.setState({ 
-      hasError: true, 
+    this.setState({
+      hasError: true,
       viteError: event.detail,
       // Se já temos um erro genérico (Failed to fetch...), esse erro do Vite é a causa raiz
       // e deve ter prioridade na exibição.
@@ -86,21 +86,21 @@ export class ErrorBoundary extends Component<Props, State> {
     if (event instanceof ErrorEvent) return
 
     const target = event.target as HTMLElement
-    
+
     if (!target || !target.tagName) return
-    
+
     const tagName = target.tagName.toUpperCase()
     const src = (target as any).src || (target as any).href || (target as any).data || 'unknown'
-    
+
     // Recursos críticos que quebram a aplicação
     const criticalResources = ['SCRIPT', 'LINK']
-    
+
     // Recursos de mídia que apenas logamos (não quebram a app)
     const mediaResources = ['IMG', 'VIDEO', 'AUDIO', 'SOURCE']
-    
+
     // Recursos embarcados que podem ou não ser críticos
     const embeddedResources = ['IFRAME', 'EMBED', 'OBJECT']
-    
+
     if (criticalResources.includes(tagName)) {
       // Erro crítico - quebra a aplicação
       const error = new Error(`Falha ao carregar recurso crítico (${tagName}): ${src}`)
@@ -124,10 +124,10 @@ export class ErrorBoundary extends Component<Props, State> {
   handleGlobalError = (event: ErrorEvent) => {
     // Captura erros síncronos de event handlers
     console.error("Global error:", event.error)
-    
+
     // Previne o erro de aparecer no console novamente
     event.preventDefault()
-    
+
     this.setState({
       hasError: true,
       error: event.error || new Error(event.message),
@@ -138,15 +138,15 @@ export class ErrorBoundary extends Component<Props, State> {
   handleUnhandledRejection = (event: PromiseRejectionEvent) => {
     // Captura erros de promises não tratadas
     console.error("Unhandled promise rejection:", event.reason)
-    
+
     // Previne o erro de aparecer no console novamente
     event.preventDefault()
-    
+
     // Garante que o reason é um Error
-    const error = event.reason instanceof Error 
-      ? event.reason 
+    const error = event.reason instanceof Error
+      ? event.reason
       : new Error(String(event.reason))
-    
+
     this.setState({
       hasError: true,
       error,
@@ -163,7 +163,7 @@ export class ErrorBoundary extends Component<Props, State> {
   extractAllEnvVarNames(error: Error): string[] {
     const message = error.message;
     const allVars = new Set<string>();
-    
+
     // Padrões comuns de variáveis de ambiente
     const patterns = [
       /NEXT_PUBLIC_[A-Z0-9_]+/g,
@@ -173,7 +173,7 @@ export class ErrorBoundary extends Component<Props, State> {
       /import\.meta\.env\.([A-Z0-9_]+)/g,
       /process\.env\.([A-Z0-9_]+)/g,
     ];
-    
+
     for (const pattern of patterns) {
       const matches = message.matchAll(pattern);
       for (const match of matches) {
@@ -187,7 +187,7 @@ export class ErrorBoundary extends Component<Props, State> {
         }
       }
     }
-    
+
     return Array.from(allVars);
   }
 
@@ -200,7 +200,7 @@ export class ErrorBoundary extends Component<Props, State> {
   // Obter informações sobre onde conseguir a API key
   getApiKeyInfo(envVarName: string): { name: string; url: string; description: string } | null {
     const varLower = envVarName.toLowerCase();
-    
+
     // OpenAI
     if (varLower.includes('openai')) {
       return {
@@ -209,7 +209,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Crie sua chave API no painel da OpenAI'
       };
     }
-    
+
     // Anthropic / Claude
     if (varLower.includes('anthropic') || varLower.includes('claude')) {
       return {
@@ -218,7 +218,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Crie sua chave API no console da Anthropic'
       };
     }
-    
+
     // Supabase
     if (varLower.includes('supabase')) {
       return {
@@ -227,7 +227,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Encontre suas chaves no dashboard do Supabase'
       };
     }
-    
+
     // Google (Gemini, etc)
     if (varLower.includes('google') || varLower.includes('gemini')) {
       return {
@@ -236,7 +236,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Crie sua chave API no Google AI Studio'
       };
     }
-    
+
     // Stripe
     if (varLower.includes('stripe')) {
       return {
@@ -245,7 +245,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Encontre suas chaves no dashboard do Stripe'
       };
     }
-    
+
     // GitHub
     if (varLower.includes('github')) {
       return {
@@ -254,7 +254,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Crie um token de acesso pessoal no GitHub'
       };
     }
-    
+
     // Vercel
     if (varLower.includes('vercel')) {
       return {
@@ -263,7 +263,7 @@ export class ErrorBoundary extends Component<Props, State> {
         description: 'Crie um token no dashboard da Vercel'
       };
     }
-    
+
     return null;
   }
 
@@ -280,8 +280,8 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Erros de Ambiente / Configuração
     if (
-      message.includes('env') || 
-      message.includes('environment') || 
+      message.includes('env') ||
+      message.includes('environment') ||
       message.includes('variable') ||
       message.includes('import.meta.env') ||
       message.includes('process.env') ||
@@ -292,18 +292,18 @@ export class ErrorBoundary extends Component<Props, State> {
 
     // Erros de Sintaxe / Referência
     if (
-      name === 'SyntaxError' || 
+      name === 'SyntaxError' ||
       name === 'ReferenceError' ||
       message.includes('is not defined') ||
       message.includes('unexpected token') ||
-      message.includes('failed to fetch dynamically imported module') // Erro de sintaxe via Lazy Load
+      message.includes('unexpected token')
     ) {
       return 'syntax'
     }
 
     // Erros de Rede / Importação Dinâmica (Vite)
     if (
-      message.includes('failed to fetch') || 
+      message.includes('failed to fetch') ||
       message.includes('network request') ||
       message.includes('failed to load module') ||
       message.includes('falha ao carregar recurso') ||
@@ -362,13 +362,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   // Limpar URLs da sandbox para mostrar apenas o caminho do arquivo
   cleanSandboxUrl = (message: string): string => {
-    // Remove URLs da sandbox e mantém apenas o caminho do arquivo
-    // Exemplo: https://8080-{uuid}-{token}.lasy.uk/src/App.tsx?t=123 -> src/App.tsx
-    // Suporta tanto lasy.uk quanto lasy.app
-    return message.replace(
-      /https?:\/\/8080-[a-f0-9-]+-[a-zA-Z0-9_-]+\.lasy\.(uk|app)\//gi,
-      ''
-    ).replace(/\?t=\d+/g, '') // Remove timestamps
+    return message.replace(/\?t=\d+/g, '') // Remove timestamps
   }
 
   handleReset = () => {
@@ -392,7 +386,7 @@ export class ErrorBoundary extends Component<Props, State> {
       }
     } else if (error) {
       textToCopy = `Erro: ${this.cleanSandboxUrl(error.toString())}\n`
-      
+
       if (error instanceof AggregateError) {
         textToCopy += `\nErros Agregados (${error.errors.length}):\n`
         error.errors.forEach((err, index) => {
@@ -403,7 +397,7 @@ export class ErrorBoundary extends Component<Props, State> {
       if (errorInfo && errorInfo.componentStack) {
         textToCopy += `\nComponent Stack:\n${this.cleanSandboxUrl(errorInfo.componentStack)}`
       }
-      
+
       if (error.stack) {
         textToCopy += `\n\nStack Trace Original:\n${this.cleanSandboxUrl(error.stack)}`
       }
@@ -416,19 +410,19 @@ export class ErrorBoundary extends Component<Props, State> {
     // Determinar tipo de erro
     const { viteError, error } = this.state
     const errorType = this.getErrorType(error || new Error('Unknown'))
-    const typeLabel = viteError ? 'Compilação' : 
-                     errorType === 'syntax' ? 'Sintaxe' :
-                     errorType === 'env' ? 'Configuração' :
-                     errorType === 'network' ? 'Rede' :
-                     errorType === 'aggregate' ? 'Múltiplos' : 'Runtime'
-    
+    const typeLabel = viteError ? 'Compilação' :
+      errorType === 'syntax' ? 'Sintaxe' :
+        errorType === 'env' ? 'Configuração' :
+          errorType === 'network' ? 'Rede' :
+            errorType === 'aggregate' ? 'Múltiplos' : 'Runtime'
+
     let message = ''
-    
+
     if (asMarkdown) {
       // Formato Markdown (para UI do chat)
       message = `**Erro na Preview:** ${this.cleanSandboxUrl(viteError ? viteError.message : (error?.message || 'Erro desconhecido'))}\n\n`
       message += `**Tipo:** \`${typeLabel}\`\n\n`
-      
+
       // ✅ Tratar múltiplos erros (AggregateError)
       if (error instanceof AggregateError && error.errors.length > 0) {
         message += `**Erros Detectados (${error.errors.length}):**\n\n`
@@ -446,7 +440,7 @@ export class ErrorBoundary extends Component<Props, State> {
         const stackLines = this.cleanSandboxUrl(error.stack).split('\n').slice(0, 5).join('\n')
         message += `**Stack Trace:**\n\`\`\`text\n${stackLines}\n\`\`\`\n\n`
       }
-      
+
       message += `**Instruções:**\n`
       message += `1. Revise o código e corrija o erro acima\n`
       message += `2. **Se você não souber que erro é esse, rode a build para obter mais detalhes**\n`
@@ -455,7 +449,7 @@ export class ErrorBoundary extends Component<Props, State> {
       // Formato Texto Plano (para copiar)
       message = `ERRO NA PREVIEW: ${this.cleanSandboxUrl(viteError ? viteError.message : (error?.message || 'Erro desconhecido'))}\n\n`
       message += `TIPO: ${typeLabel}\n\n`
-      
+
       // ✅ Tratar múltiplos erros (AggregateError)
       if (error instanceof AggregateError && error.errors.length > 0) {
         message += `ERROS DETECTADOS (${error.errors.length}):\n\n`
@@ -473,13 +467,13 @@ export class ErrorBoundary extends Component<Props, State> {
         const stackLines = this.cleanSandboxUrl(error.stack).split('\n').slice(0, 5).join('\n')
         message += `STACK TRACE:\n${stackLines}\n\n`
       }
-      
+
       message += `INSTRUÇÕES:\n`
       message += `1. Revise o código e corrija o erro acima\n`
       message += `2. Se você não souber que erro é esse, rode a build para obter mais detalhes\n`
       message += `3. Verifique se todas as dependências estão instaladas corretamente\n`
     }
-    
+
     return message
   }
 
@@ -496,7 +490,7 @@ export class ErrorBoundary extends Component<Props, State> {
       setTimeout(() => this.setState({ isCopied: false }), 2000)
     } catch (clipboardError) {
       console.warn('Clipboard API falhou, tentando fallback:', clipboardError)
-      
+
       // Fallback: criar textarea temporário
       try {
         const textarea = document.createElement('textarea')
@@ -506,10 +500,10 @@ export class ErrorBoundary extends Component<Props, State> {
         textarea.style.pointerEvents = 'none'
         document.body.appendChild(textarea)
         textarea.select()
-        
+
         const success = document.execCommand('copy')
         document.body.removeChild(textarea)
-        
+
         if (success) {
           this.setState({ isCopied: true })
           toast.success("Erro copiado!")
@@ -526,7 +520,7 @@ export class ErrorBoundary extends Component<Props, State> {
 
   handleSendToAI = () => {
     const errorText = this.getErrorText()
-    
+
     if (!errorText) {
       toast.error("Nenhum erro para enviar")
       return
@@ -537,17 +531,17 @@ export class ErrorBoundary extends Component<Props, State> {
     try {
       // ✅ Usa formato markdown para enviar para IA (renderiza card bonito)
       const message = this.getFormattedErrorMessage(true)
-      
+
       window.parent.postMessage({
         type: 'send-error-to-ai',
         message: message
       }, '*')
 
       toast.success("Erro enviado para correção!")
-      
+
       // Reset estado de erro após enviar (opcional)
       setTimeout(() => {
-        this.setState({ 
+        this.setState({
           hasError: false,
           error: null,
           errorInfo: null,
@@ -565,14 +559,14 @@ export class ErrorBoundary extends Component<Props, State> {
   handleOpenEnvVars = () => {
     const error = this.state.error || new Error('Unknown Error')
     const envVarNames = this.extractAllEnvVarNames(error)
-    
+
     try {
       // Enviar TODAS as variáveis para o modal pré-preencher
       window.parent.postMessage({
         type: 'open-env-vars',
         envVars: envVarNames // Array com todas as variáveis
       }, '*')
-      
+
       toast.success("Abrindo gerenciador de variáveis...")
     } catch (err) {
       console.error('Erro ao abrir gerenciador:', err)
@@ -592,7 +586,7 @@ export class ErrorBoundary extends Component<Props, State> {
       const isEnvError = errorType === 'env'
       const envVarNames = isEnvError ? this.extractAllEnvVarNames(error) : []
       const hasMultipleEnvVars = envVarNames.length > 1
-      
+
       // Limpar mensagens de erro das URLs da sandbox
       const cleanErrorMessage = (msg: string) => this.cleanSandboxUrl(msg)
 
@@ -605,7 +599,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 <CardTitle className="text-base">{config.title}</CardTitle>
               </div>
             </CardHeader>
-            
+
             <CardContent className="space-y-3 px-4 py-3">
               {/* ✅ ERRO DE ENV: UI compacta e amigável */}
               {isEnvError && envVarNames.length > 0 ? (
@@ -614,7 +608,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   <div className="rounded-lg border border-muted bg-muted/30 p-4 space-y-3">
                     {/* Mensagem */}
                     <p className="text-sm text-foreground leading-relaxed">
-                      {hasMultipleEnvVars 
+                      {hasMultipleEnvVars
                         ? 'Sua aplicação precisa de algumas chaves de acesso para funcionar.'
                         : 'Sua aplicação precisa de uma chave de acesso para funcionar.'}
                     </p>
@@ -637,7 +631,7 @@ export class ErrorBoundary extends Component<Props, State> {
                     {(() => {
                       // Agrupar variáveis por serviço
                       const services = new Map<string, string[]>();
-                      
+
                       for (const varName of envVarNames) {
                         const apiKeyInfo = this.getApiKeyInfo(varName);
                         if (apiKeyInfo) {
@@ -651,7 +645,7 @@ export class ErrorBoundary extends Component<Props, State> {
                       if (services.size === 1) {
                         const firstVar = envVarNames[0];
                         const apiKeyInfo = this.getApiKeyInfo(firstVar);
-                        
+
                         if (apiKeyInfo) {
                           return (
                             <div>
@@ -678,9 +672,9 @@ export class ErrorBoundary extends Component<Props, State> {
                             {Array.from(services.entries()).map(([serviceName, vars]) => {
                               const firstVar = vars[0];
                               const apiKeyInfo = this.getApiKeyInfo(firstVar);
-                              
+
                               if (!apiKeyInfo) return null;
-                              
+
                               return (
                                 <Button
                                   key={serviceName}
@@ -712,61 +706,61 @@ export class ErrorBoundary extends Component<Props, State> {
                 <>
                   {/* Se tiver erro do Vite com detalhes de código */}
                   {viteError ? (
-                <div className="space-y-2">
-                  <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
-                    <div className="flex items-start gap-2">
-                      <FileCode className="h-4 w-4 shrink-0 mt-0.5 text-destructive" />
-                      <div className="min-w-0 flex-1 space-y-1">
-                        <p className="text-sm font-medium leading-tight">
-                          {cleanErrorMessage(viteError.message)}
-                        </p>
-                        {viteError.loc && (
-                          <p className="text-xs font-mono text-muted-foreground">
-                            {viteError.id.split('/').pop()}:{viteError.loc.line}:{viteError.loc.column}
-                          </p>
-                        )}
+                    <div className="space-y-2">
+                      <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
+                        <div className="flex items-start gap-2">
+                          <FileCode className="h-4 w-4 shrink-0 mt-0.5 text-destructive" />
+                          <div className="min-w-0 flex-1 space-y-1">
+                            <p className="text-sm font-medium leading-tight">
+                              {cleanErrorMessage(viteError.message)}
+                            </p>
+                            {viteError.loc && (
+                              <p className="text-xs font-mono text-muted-foreground">
+                                {viteError.id.split('/').pop()}:{viteError.loc.line}:{viteError.loc.column}
+                              </p>
+                            )}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
 
-                    {viteError.frame && (
-                      <ScrollArea className="h-[180px] w-full rounded-md border bg-muted/30">
-                        <pre className="p-3 text-xs font-mono leading-relaxed">
-                          {viteError.frame}
-                        </pre>
-                      </ScrollArea>
-                    )}
-                  </div>
-                ) : isAggregate && error instanceof AggregateError ? (
-                <div className="space-y-2 max-h-[240px] overflow-y-auto">
-                  {error.errors.map((err, index) => (
-                    <div key={index} className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
+                      {viteError.frame && (
+                        <ScrollArea className="h-[180px] w-full rounded-md border bg-muted/30">
+                          <pre className="p-3 text-xs font-mono leading-relaxed">
+                            {viteError.frame}
+                          </pre>
+                        </ScrollArea>
+                      )}
+                    </div>
+                  ) : isAggregate && error instanceof AggregateError ? (
+                    <div className="space-y-2 max-h-[240px] overflow-y-auto">
+                      {error.errors.map((err, index) => (
+                        <div key={index} className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
+                          <div className="flex items-start gap-2">
+                            <XCircle className="h-4 w-4 shrink-0 mt-0.5 text-destructive" />
+                            <div className="min-w-0 flex-1">
+                              <p className="text-xs font-semibold text-muted-foreground mb-1">
+                                Erro {index + 1}
+                              </p>
+                              <p className="font-mono text-xs break-all">
+                                {cleanErrorMessage(err.toString())}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
                       <div className="flex items-start gap-2">
                         <XCircle className="h-4 w-4 shrink-0 mt-0.5 text-destructive" />
                         <div className="min-w-0 flex-1">
-                          <p className="text-xs font-semibold text-muted-foreground mb-1">
-                            Erro {index + 1}
-                          </p>
-                          <p className="font-mono text-xs break-all">
-                            {cleanErrorMessage(err.toString())}
+                          <p className="font-mono text-xs break-all leading-relaxed">
+                            {cleanErrorMessage(error.toString())}
                           </p>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              ) : (
-                  <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-3">
-                    <div className="flex items-start gap-2">
-                      <XCircle className="h-4 w-4 shrink-0 mt-0.5 text-destructive" />
-                      <div className="min-w-0 flex-1">
-                        <p className="font-mono text-xs break-all leading-relaxed">
-                          {cleanErrorMessage(error.toString())}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                  )}
 
                   {/* Stack Trace compacto */}
                   {!viteError && this.state.errorInfo && (
@@ -787,10 +781,10 @@ export class ErrorBoundary extends Component<Props, State> {
             </CardContent>
 
             <CardFooter className="flex justify-center gap-2 p-3 border-t">
-              <Button 
+              <Button
                 size="sm"
-                variant="outline" 
-                onClick={this.handleCopyError} 
+                variant="outline"
+                onClick={this.handleCopyError}
                 className="gap-1.5"
                 disabled={this.state.isSending}
               >
@@ -798,7 +792,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 {this.state.isCopied ? "Copiado" : "Copiar"}
               </Button>
               {isEnvError && envVarNames.length > 0 ? (
-                <Button 
+                <Button
                   size="sm"
                   variant="default"
                   onClick={this.handleOpenEnvVars}
@@ -808,7 +802,7 @@ export class ErrorBoundary extends Component<Props, State> {
                   {hasMultipleEnvVars ? 'Configurar Variáveis' : 'Configurar Variável'}
                 </Button>
               ) : (
-                <Button 
+                <Button
                   size="sm"
                   variant="default"
                   onClick={this.handleSendToAI}

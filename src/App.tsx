@@ -6,10 +6,12 @@ import { PricingPlans } from '@/components/PricingPlans'
 import { TechnicalFeatures } from '@/components/TechnicalFeatures'
 import { FAQ } from '@/components/FAQ'
 import { Footer } from '@/components/Footer'
+import { SecurityShield } from '@/components/SecurityShield'
 
 export function App() {
   return (
     <div className="relative min-h-screen bg-background">
+      <SecurityShield />
       <Navbar />
       <HeroSection />
       <MoviesCarousel />

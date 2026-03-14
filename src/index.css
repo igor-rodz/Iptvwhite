@@ -133,6 +133,7 @@
 
   body {
     @apply font-sans bg-background text-foreground;
+    user-select: none;
   }
 
   html {

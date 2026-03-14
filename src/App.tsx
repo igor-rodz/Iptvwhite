@@ -7,10 +7,12 @@ import { TechnicalFeatures } from '@/components/TechnicalFeatures'
 import { FAQ } from '@/components/FAQ'
 import { Footer } from '@/components/Footer'
 import { SecurityShield } from '@/components/SecurityShield'
+import { Toaster } from 'sonner'
 
 export function App() {
   return (
     <div className="relative min-h-screen bg-background">
+      <Toaster position="top-center" richColors />
       <SecurityShield />
       <Navbar />
       <HeroSection />

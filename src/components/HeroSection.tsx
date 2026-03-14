@@ -1,7 +1,44 @@
 import { Button } from '@/components/ui/button'
-import { Play, Sparkles } from 'lucide-react'
+import { Play, Sparkles, Loader2 } from 'lucide-react'
+import { useState } from 'react'
+import { toast } from 'sonner'
 
 export function HeroSection() {
+  const [isLoading, setIsLoading] = useState(false)
+
+  const handleGenerateTest = async () => {
+    setIsLoading(true)
+    const toastId = toast.loading('Gerando seu acesso de teste...')
+
+    try {
+      const response = await fetch('/api/generate-test', {
+        method: 'POST',
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // Here we handle the successful response
+        // Note: The structure depends on what Sigma API returns
+        // We'll show the message and potentially the credentials
+        console.log('API Success:', data)
+        const message = data.msg || data.message || 'Teste gerado com sucesso! Verifique os dados abaixo.'
+        toast.success(message, { id: toastId, duration: 10000 })
+        
+        // If the API returns credentials in a specific format, we could show them
+        if (data.username && data.password) {
+          toast.info(`Usuário: ${data.username} | Senha: ${data.password}`, { duration: 15000 })
+        }
+      } else {
+        throw new Error(data.error || 'Erro ao gerar teste')
+      }
+    } catch (error) {
+      console.error('API Error:', error)
+      toast.error('Não foi possível gerar o teste automaticamente agora. Tente pelo WhatsApp!', { id: toastId })
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <section className="relative min-h-screen flex items-start md:items-center justify-center overflow-hidden pt-28 pb-20">
@@ -44,10 +81,15 @@ export function HeroSection() {
             <Button
               size="lg"
               className="h-16 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/30 transition-all hover:scale-105 active:scale-95"
-              onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
+              onClick={handleGenerateTest}
+              disabled={isLoading}
             >
-              <Play className="w-6 h-6 mr-2 fill-current" />
-              QUERO MEU ACESSO IMEDIATO
+              {isLoading ? (
+                <Loader2 className="w-6 h-6 mr-2 animate-spin" />
+              ) : (
+                <Play className="w-6 h-6 mr-2 fill-current" />
+              )}
+              {isLoading ? 'GERANDO ACESSO...' : 'QUERO MEU ACESSO IMEDIATO'}
             </Button>
           </div>
 

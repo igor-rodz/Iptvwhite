@@ -175,7 +175,7 @@ export function PricingPlans() {
                     plan.bestValue &&
                     'bg-primary hover:bg-primary/90 shadow-lg shadow-primary/30 ring-2 ring-primary/50'
                   )}
-                  onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+                  onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
                 >
                   ASSINAR AGORA
                 </Button>

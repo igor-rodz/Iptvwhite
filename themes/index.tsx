@@ -16,9 +16,7 @@
  * - Border radius
  * - Espaçamento e tracking
  */
-
 export { neonTheme } from './neon';
-export { vercelTheme } from './vercel';
 export { terracottaTheme } from './terracotta';
 export { roseTheme } from './rose';
 export { mintTheme } from './mint';
@@ -45,7 +43,6 @@ export interface Theme {
  */
 export const AVAILABLE_THEMES = [
   'Neon',      // Tema vibrante com cores neon e alta saturação
-  'Vercel',    // Design minimalista e limpo inspirado no Vercel
   'Terracotta',// Cores terrosas e aconchegantes com tipografia mono
   'Rose',      // Paleta rosa e roxa com tipografia elegante
   'Mint',      // Tons verdes e mentolados com visual clean

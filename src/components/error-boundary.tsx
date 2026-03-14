@@ -246,24 +246,6 @@ export class ErrorBoundary extends Component<Props, State> {
       };
     }
 
-    // GitHub
-    if (varLower.includes('github')) {
-      return {
-        name: 'GitHub',
-        url: 'https://github.com/settings/tokens',
-        description: 'Crie um token de acesso pessoal no GitHub'
-      };
-    }
-
-    // Vercel
-    if (varLower.includes('vercel')) {
-      return {
-        name: 'Vercel',
-        url: 'https://vercel.com/account/tokens',
-        description: 'Crie um token no dashboard da Vercel'
-      };
-    }
-
     return null;
   }
 

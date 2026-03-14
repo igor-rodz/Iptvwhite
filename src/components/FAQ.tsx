@@ -120,7 +120,7 @@ export function FAQ() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               className="px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors"
-              onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+              onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
             >
               💬 Falar no WhatsApp
             </button>

@@ -7,7 +7,6 @@ Esta pasta contém os temas pré-configurados que servem como referência para a
 ```
 themes/
 ├── neon.tsx         - Tema vibrante com cores neon e alta saturação
-├── vercel.tsx       - Design minimalista e limpo inspirado no Vercel
 ├── terracotta.tsx   - Cores terrosas e aconchegantes com tipografia mono
 ├── rose.tsx         - Paleta rosa e roxa com tipografia elegante
 ├── mint.tsx         - Tons verdes e mentolados com visual clean
@@ -30,25 +29,19 @@ themes/
 - **Estilo**: Moderno, vibrante, alta saturação
 - **Uso**: Apps jovens, criativos, tech
 
-### 2. Vercel
-- **Cores**: Preto e branco puros, tons de cinza
-- **Fontes**: Inter, SF Mono
-- **Estilo**: Minimalista, clean, profissional
-- **Uso**: Dashboards, ferramentas profissionais, SaaS
-
-### 3. Terracotta
+### 2. Terracotta
 - **Cores**: Laranja terroso, tons marrons e creme
 - **Fontes**: Geist Mono, JetBrains Mono
 - **Estilo**: Aconchegante, orgânico, terroso
 - **Uso**: Blogs, portfólios, sites culturais
 
-### 4. Rose
+### 3. Rose
 - **Cores**: Rosa pastel, roxo claro, tons suaves
 - **Fontes**: Poppins, Playfair Display, Space Mono
 - **Estilo**: Elegante, feminino, sofisticado
 - **Uso**: E-commerce de moda, beleza, lifestyle
 
-### 5. Mint
+### 4. Mint
 - **Cores**: Verde menta, tons claros e refrescantes
 - **Fontes**: Outfit
 - **Estilo**: Clean, refrescante, moderno

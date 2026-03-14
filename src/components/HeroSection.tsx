@@ -12,11 +12,11 @@ export function HeroSection() {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           {/* Logo Principal */}
           <div className="flex justify-center mb-6">
-            <img
-              src="/logo.png"
-              alt="AurixTV Logo"
-              className="h-20 md:h-28 w-auto animate-logo-glow rounded-3xl"
-            />
+            <div className="h-20 md:h-28 flex items-center justify-center animate-logo-glow">
+              <span className="text-4xl md:text-5xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
+                SUA MARCA
+              </span>
+            </div>
           </div>
 
           {/* Badge de destaque */}
@@ -44,7 +44,7 @@ export function HeroSection() {
             <Button
               size="lg"
               className="h-16 px-10 text-lg font-bold bg-primary hover:bg-primary/90 text-primary-foreground shadow-xl shadow-primary/30 transition-all hover:scale-105 active:scale-95"
-              onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+              onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
             >
               <Play className="w-6 h-6 mr-2 fill-current" />
               QUERO MEU ACESSO IMEDIATO

@@ -9,11 +9,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* Brand */}
           <div className="space-y-4">
-            <img
-              src="/logo.png"
-              alt="AurixTV Logo"
-              className="h-12 w-auto animate-logo-glow rounded-xl block"
-            />
+            <div className="h-12 flex items-center animate-logo-glow">
+              <span className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
+                SUA MARCA
+              </span>
+            </div>
             <p className="text-muted-foreground text-sm">
               Entretenimento ilimitado com a melhor qualidade do mercado.
               Tecnologia de ponta para streaming sem travamentos.
@@ -106,11 +106,11 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Phone className="w-4 h-4 text-primary" />
-                <span>(11) 91043-7332</span>
+                <span>(00) 00000-0000</span>
               </li>
               <li className="flex items-center gap-2 text-muted-foreground">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>djdavidc.oficial@gmail.com</span>
+                <span>contato@suamarca.com.br</span>
               </li>
             </ul>
             <div className="mt-4">
@@ -119,7 +119,7 @@ export function Footer() {
               </p>
               <button
                 className="w-full px-4 py-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-lg transition-colors text-sm"
-                onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+                onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
               >
                 💬 WhatsApp
               </button>
@@ -130,7 +130,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-border pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-            <p>© {currentYear} AurixTV. Todos os direitos reservados.</p>
+            <p>© {currentYear} Sua Marca. Todos os direitos reservados.</p>
             <p className="font-medium text-primary">Criado por Rodz</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary transition-colors">

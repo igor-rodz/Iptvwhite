@@ -19,22 +19,22 @@ export function Navbar() {
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <div className="flex items-center gap-2 group cursor-pointer" onClick={scrollToTop}>
-                        <img
-                            src="/logo.png"
-                            alt="AurixTV Logo"
-                            className="h-10 w-auto animate-logo-glow transition-transform group-hover:scale-105 rounded-xl block"
-                        />
+                        <div className="h-10 flex items-center justify-center animate-logo-glow transition-transform group-hover:scale-105">
+                            <span className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/60">
+                                SUA MARCA
+                            </span>
+                        </div>
                     </div>
 
                     {/* Desktop Nav */}
                     <div className="hidden md:flex items-center gap-8">
                         <button onClick={scrollToTop} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors focus:outline-none cursor-pointer">Início</button>
                         <a href="#planos" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Planos</a>
-                        <a href="https://wa.me/5511910437332" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Suporte</a>
+                        <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Suporte</a>
                         <Button
                             size="sm"
                             className="bg-primary hover:bg-primary/90 font-bold"
-                            onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+                            onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
                         >
                             TESTE GRÁTIS
                         </Button>
@@ -69,7 +69,7 @@ export function Navbar() {
                     Planos
                 </a>
                 <a
-                    href="https://wa.me/5511910437332"
+                    href="https://wa.me/5500000000000"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="py-2 font-medium text-muted-foreground hover:text-primary transition-colors"
@@ -79,7 +79,7 @@ export function Navbar() {
                 <Button
                     size="lg"
                     className="bg-primary hover:bg-primary/90 font-bold w-full"
-                    onClick={() => window.open('https://wa.me/5511910437332', '_blank')}
+                    onClick={() => window.open('https://wa.me/5500000000000', '_blank')}
                 >
                     TESTE GRÁTIS AGORA
                 </Button>
